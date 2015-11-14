@@ -71,7 +71,7 @@ namespace Kinect2FaceBasics_NET
             }
         }
 
-         void BodyReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
+        void BodyReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
         {
             using (var frame = e.FrameReference.AcquireFrame())
             {
@@ -91,10 +91,11 @@ namespace Kinect2FaceBasics_NET
                     }
                 }
             }
-        } 
+        }
 
         void FaceReader_FrameArrived(object sender, FaceFrameArrivedEventArgs e)
         {
+            int counter = 0;
             using (var frame = e.FrameReference.AcquireFrame())
             {
                 if (frame != null)
@@ -105,10 +106,10 @@ namespace Kinect2FaceBasics_NET
                     if (result != null)
                     {
                         // 5) Do magic!
-
                         // Get the face points, mapped in the color space.
                         var eyeLeft = result.FacePointsInColorSpace[FacePointType.EyeLeft];
                         var eyeRight = result.FacePointsInColorSpace[FacePointType.EyeRight];
+
                         // var nose = result.FacePointsInColorSpace[FacePointType.Nose];
                         //var mouthLeft = result.FacePointsInColorSpace[FacePointType.MouthCornerLeft];
                         //var mouthRight = result.FacePointsInColorSpace[FacePointType.MouthCornerRight];
@@ -132,21 +133,15 @@ namespace Kinect2FaceBasics_NET
                         //ellipseMouth.Width = Math.Abs(mouthRight.X - mouthLeft.X);
 
                         // Display or hide the ellipses
-                        if (eyeLeftClosed == DetectionResult.Yes || eyeLeftClosed == DetectionResult.Maybe)
+                        if ((eyeLeftClosed == DetectionResult.Yes || eyeLeftClosed == DetectionResult.Maybe) && (eyeRightClosed == DetectionResult.Yes || eyeRightClosed == DetectionResult.Maybe))
                         {
                             ellipseEyeLeft.Visibility = Visibility.Collapsed;
+                            ellipseEyeRight.Visibility = Visibility.Collapsed;
+                            counter++;
                         }
                         else
                         {
                             ellipseEyeLeft.Visibility = Visibility.Visible;
-                        }
-
-                        if (eyeRightClosed == DetectionResult.Yes || eyeRightClosed == DetectionResult.Maybe)
-                        {
-                            ellipseEyeRight.Visibility = Visibility.Collapsed;
-                        }
-                        else
-                        {
                             ellipseEyeRight.Visibility = Visibility.Visible;
                         }
 
