@@ -1,4 +1,5 @@
-﻿using Microsoft.Kinect;
+﻿using Microsoft.AspNet.SignalR.Client;
+using Microsoft.Kinect;
 using Microsoft.Kinect.Face;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Kinect2FaceBasics_NET
 {
     /// <summary>
@@ -26,7 +28,7 @@ namespace Kinect2FaceBasics_NET
         ColorFrameReader _colorReader = null;
         BodyFrameReader _bodyReader = null;
         IList<Body> _bodies = null;
-
+        IHubProxy stockTickerHubProxy;
         // 1) Specify a face frame source and a face frame reader
         FaceFrameSource _faceSource = null;
         FaceFrameReader _faceReader = null;
@@ -34,7 +36,9 @@ namespace Kinect2FaceBasics_NET
         public MainWindow()
         {
             InitializeComponent();
-
+            var hubConnection = new HubConnection("http://divewakeweb.azurewebsites.net/");
+            stockTickerHubProxy = hubConnection.CreateHubProxy("StockTickerHub");
+            hubConnection.Start().Wait();
             _sensor = KinectSensor.GetDefault();
 
             if (_sensor != null)
@@ -145,6 +149,15 @@ namespace Kinect2FaceBasics_NET
                             ellipseEyeRight.Visibility = Visibility.Visible;
                         }
 
+                        if (counter == 2)
+                            Sendpulse(0);
+                        else if (counter == 5)
+                            Sendpulse(1);
+                        else if (counter == 10)
+                            Sendpulse(2);
+                        else
+                            Sendpulse(3);
+
                         /*if (mouthOpen == DetectionResult.Yes || mouthOpen == DetectionResult.Maybe)
                         {
                             ellipseMouth.Height = 50.0;
@@ -158,6 +171,10 @@ namespace Kinect2FaceBasics_NET
             }
         }
 
+        void Sendpulse(int intensity)
+        {
+            stockTickerHubProxy.Invoke("Pulse", intensity);
+        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_colorReader != null)
