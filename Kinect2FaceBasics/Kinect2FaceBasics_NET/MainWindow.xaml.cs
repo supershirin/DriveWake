@@ -2,7 +2,7 @@
 using Microsoft.Kinect;
 using Microsoft.Kinect.Face;
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Threading;
 
 namespace Kinect2FaceBasics_NET
 {
@@ -32,6 +32,8 @@ namespace Kinect2FaceBasics_NET
         // 1) Specify a face frame source and a face frame reader
         FaceFrameSource _faceSource = null;
         FaceFrameReader _faceReader = null;
+        int eyeclosecounter = 0;
+        int eyeopencounter = 0;
 
         public MainWindow()
         {
@@ -99,7 +101,6 @@ namespace Kinect2FaceBasics_NET
 
         void FaceReader_FrameArrived(object sender, FaceFrameArrivedEventArgs e)
         {
-            int counter = 0;
             using (var frame = e.FrameReference.AcquireFrame())
             {
                 if (frame != null)
@@ -139,24 +140,44 @@ namespace Kinect2FaceBasics_NET
                         // Display or hide the ellipses
                         if ((eyeLeftClosed == DetectionResult.Yes || eyeLeftClosed == DetectionResult.Maybe) && (eyeRightClosed == DetectionResult.Yes || eyeRightClosed == DetectionResult.Maybe))
                         {
-                            ellipseEyeLeft.Visibility = Visibility.Collapsed;
-                            ellipseEyeRight.Visibility = Visibility.Collapsed;
-                            counter++;
-                        }
+                            /*while ((eyeLeftClosed == DetectionResult.Yes || eyeLeftClosed == DetectionResult.Maybe) && (eyeRightClosed == DetectionResult.Yes || eyeRightClosed == DetectionResult.Maybe))
+                            {
+                                if (counter >= 3)
+                                {
+                                    Sendpulse(4);
+                                    break;
+                                }
+                                ellipseEyeLeft.Visibility = Visibility.Collapsed;
+                                ellipseEyeRight.Visibility = Visibility.Collapsed;
+                                counter++;
+                                Thread.Sleep(1000);
+                            }*/
+                            eyeclosecounter++;
+                            eyeopencounter = 0;
+                            Sendpulse(0);                        }
                         else
                         {
                             ellipseEyeLeft.Visibility = Visibility.Visible;
                             ellipseEyeRight.Visibility = Visibility.Visible;
+                            Sendpulse(1);
+                            eyeopencounter++;
+                            eyeclosecounter = 0;
+                            //Thread.Sleep(1000);
                         }
 
-                        if (counter == 2)
+                        if (eyeclosecounter > 30) 
+                            Sendpulse(2222);
+                        if (eyeopencounter > 60)
+                            Sendpulse(3333);
+
+                      /*  if (counter == 2)
                             Sendpulse(0);
                         else if (counter == 5)
                             Sendpulse(1);
                         else if (counter == 10)
                             Sendpulse(2);
                         else
-                            Sendpulse(3);
+                            Sendpulse(3); */
 
                         /*if (mouthOpen == DetectionResult.Yes || mouthOpen == DetectionResult.Maybe)
                         {
