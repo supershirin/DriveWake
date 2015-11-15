@@ -230,11 +230,11 @@ public class BandNotificationAppActivity extends Activity {
                     // send a vibration request of type alert alarm to the Band
                     client.getNotificationManager().vibrate(VibrationType.RAMP_UP).await();
                     break;
-                case 2222:
+                case 111:
                     // send a vibration request of type alert alarm to the Band
                     client.getNotificationManager().vibrate(VibrationType.NOTIFICATION_ALARM).await();
                     break;
-                case 3333:
+                case 000:
                     // send a vibration request of type alert alarm to the Band
                     client.getNotificationManager().vibrate(VibrationType.NOTIFICATION_ONE_TONE).await();
                     break;
