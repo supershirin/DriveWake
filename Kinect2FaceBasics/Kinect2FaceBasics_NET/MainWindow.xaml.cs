@@ -1,21 +1,10 @@
 ﻿using Microsoft.AspNet.SignalR.Client;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Face;
-using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Threading;
 
 namespace Kinect2FaceBasics_NET
 {
@@ -154,7 +143,8 @@ namespace Kinect2FaceBasics_NET
                             }*/
                             eyeclosecounter++;
                             eyeopencounter = 0;
-                            Sendpulse(0);                        }
+                            Sendpulse(0);
+                        }
                         else
                         {
                             ellipseEyeLeft.Visibility = Visibility.Visible;
@@ -165,19 +155,19 @@ namespace Kinect2FaceBasics_NET
                             //Thread.Sleep(1000);
                         }
 
-                        if (eyeclosecounter > 30) 
-                            Sendpulse(2222);
+                        if (eyeclosecounter > 30)
+                            Sendpulse(000);
                         if (eyeopencounter > 60)
-                            Sendpulse(3333);
+                            Sendpulse(111);
 
-                      /*  if (counter == 2)
-                            Sendpulse(0);
-                        else if (counter == 5)
-                            Sendpulse(1);
-                        else if (counter == 10)
-                            Sendpulse(2);
-                        else
-                            Sendpulse(3); */
+                        /*  if (counter == 2)
+                              Sendpulse(0);
+                          else if (counter == 5)
+                              Sendpulse(1);
+                          else if (counter == 10)
+                              Sendpulse(2);
+                          else
+                              Sendpulse(3); */
 
                         /*if (mouthOpen == DetectionResult.Yes || mouthOpen == DetectionResult.Maybe)
                         {
