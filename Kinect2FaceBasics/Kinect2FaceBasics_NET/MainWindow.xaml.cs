@@ -37,7 +37,7 @@ namespace Kinect2FaceBasics_NET
         {
             InitializeComponent();
             var hubConnection = new HubConnection("http://divewakeweb.azurewebsites.net/");
-            stockTickerHubProxy = hubConnection.CreateHubProxy("StockTickerHub");
+            stockTickerHubProxy = hubConnection.CreateHubProxy("WakeHub");
             hubConnection.Start().Wait();
             _sensor = KinectSensor.GetDefault();
 
