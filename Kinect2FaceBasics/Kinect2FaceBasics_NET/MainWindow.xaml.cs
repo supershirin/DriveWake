@@ -143,13 +143,13 @@ namespace Kinect2FaceBasics_NET
                             }*/
                             eyeclosecounter++;
                             eyeopencounter = 0;
-                            Sendpulse(0);
+                            //Sendpulse(0);
                         }
                         else
                         {
                             ellipseEyeLeft.Visibility = Visibility.Visible;
                             ellipseEyeRight.Visibility = Visibility.Visible;
-                            Sendpulse(1);
+                            //Sendpulse(1);
                             eyeopencounter++;
                             eyeclosecounter = 0;
                             //Thread.Sleep(1000);
