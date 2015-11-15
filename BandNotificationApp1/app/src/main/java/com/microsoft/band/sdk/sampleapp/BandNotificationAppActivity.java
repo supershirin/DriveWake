@@ -18,8 +18,14 @@
 package com.microsoft.band.sdk.sampleapp;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -58,7 +64,6 @@ public class BandNotificationAppActivity extends Activity {
 	private BandClient client = null;
 	private Button btnStart;
 	private TextView txtStatus;
-	
 	private UUID tileId = UUID.fromString("aa0D508F-70A3-47D4-BBA3-812BADB1F8Aa");
 	
     @Override
@@ -77,8 +82,6 @@ public class BandNotificationAppActivity extends Activity {
 			}
 		});
 
-
-
     }
 
 
@@ -96,6 +99,16 @@ public class BandNotificationAppActivity extends Activity {
         }
         super.onDestroy();
     }
+
+    private void sendSound(){
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        Intent intent = new Intent(BandNotificationAppActivity.this, NotificationReceiver.class);
+//        PendingIntent pIntent = PendingIntent.getActivity(BandNotificationAppActivity.this, 0, intent, 0);
+        Notification soundNotif = new Notification.Builder(this).setSound(soundUri).build();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(0, soundNotif);
+
+    }
     
 	private class appTask extends AsyncTask<Void, Void, Void> {
 		@Override
@@ -110,7 +123,7 @@ public class BandNotificationAppActivity extends Activity {
                     //call hub
                     SignalRFuture<Void> awaitConnection = connection.start(new LongPollingTransport(connection.getLogger()));
 
-                    appendToUI("connecting to web server.");
+//                    appendToUI("connecting to web server.");
                     try {
                         awaitConnection.get();
                         appendToUI("connected to web server.");
@@ -129,18 +142,18 @@ public class BandNotificationAppActivity extends Activity {
                         @Override
                         // Handler handler = new SocketHandler();
                         public void run(final Integer intensity) {
-                            appendToUI("handler invoked");
+//                            appendToUI("handler invoked");
                             // Since we are updating the UI,
                             // we need to use a handler of the UI thread.
-
-                            appendToUI("intensity = " + intensity);
+//                            appendToUI("intensity = " + intensity);
                             intensitySelect(intensity);
+                            //add sound effect
+                            sendSound();
                         }
                     };
 
                     hub.on("pulseClient",handlerCon, Integer.class);
                     //responds with sending commands
-
 
                 } else {
                     appendToUI("Band isn't connected. Please make sure bluetooth is on and the band is in range.\n");
@@ -226,10 +239,10 @@ public class BandNotificationAppActivity extends Activity {
     private void intensitySelect(int select){
         try {
             switch (select){
-                case 1:
-                    // send a vibration request of type alert alarm to the Band
-                    client.getNotificationManager().vibrate(VibrationType.RAMP_UP).await();
-                    break;
+//                case 1:
+//                    // send a vibration request of type alert alarm to the Band
+//                    client.getNotificationManager().vibrate(VibrationType.RAMP_UP).await();
+//                    break;
                 case 111:
                     // send a vibration request of type alert alarm to the Band
                     client.getNotificationManager().vibrate(VibrationType.NOTIFICATION_ALARM).await();
@@ -238,14 +251,14 @@ public class BandNotificationAppActivity extends Activity {
                     // send a vibration request of type alert alarm to the Band
                     client.getNotificationManager().vibrate(VibrationType.NOTIFICATION_ONE_TONE).await();
                     break;
-                case 4:
-                    // send a vibration request of type alert alarm to the Band
-                    client.getNotificationManager().vibrate(VibrationType.ONE_TONE_HIGH).await();
-                    break;
-                case 5:
-                    // send a vibration request of type alert alarm to the Band
-                    client.getNotificationManager().vibrate(VibrationType.THREE_TONE_HIGH).await();
-                    break;
+//                case 4:
+//                    // send a vibration request of type alert alarm to the Band
+//                    client.getNotificationManager().vibrate(VibrationType.ONE_TONE_HIGH).await();
+//                    break;
+//                case 5:
+//                    // send a vibration request of type alert alarm to the Band
+//                    client.getNotificationManager().vibrate(VibrationType.THREE_TONE_HIGH).await();
+//                    break;
                 default:
                     break;
             }

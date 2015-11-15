@@ -42,13 +42,13 @@
       <file leaf-file-name="BandNotificationAppActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/microsoft/band/sdk/sampleapp/BandNotificationAppActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14117648" vertical-offset="3255" max-vertical-offset="3885">
-              <caret line="229" column="23" selection-start-line="229" selection-start-column="23" selection-end-line="229" selection-end-column="23" />
+            <state vertical-scroll-proportion="-0.62352943" vertical-offset="2410" max-vertical-offset="4080">
+              <caret line="146" column="30" selection-start-line="146" selection-start-column="30" selection-end-line="146" selection-end-column="30" />
               <folding>
-                <element signature="e#0#10656#0" expanded="true" />
+                <element signature="e#0#11560#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#5140#5711#0" expanded="true" />
-                <element signature="e#5688#5689#0" expanded="true" />
+                <element signature="e#5930#6592#0" expanded="true" />
+                <element signature="e#6569#6570#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1147,10 +1147,10 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1823" max-vertical-offset="4005">
           <caret line="135" column="53" selection-start-line="135" selection-start-column="53" selection-end-line="135" selection-end-column="53" />
           <folding>
-            <element signature="e#0#10656#0" expanded="true" />
+            <element signature="e#0#11560#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#5140#5711#0" expanded="true" />
-            <element signature="e#5688#5689#0" expanded="true" />
+            <element signature="e#5930#6592#0" expanded="true" />
+            <element signature="e#6569#6570#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1248,13 +1248,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/microsoft/band/sdk/sampleapp/BandNotificationAppActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14117648" vertical-offset="3255" max-vertical-offset="3885">
-          <caret line="229" column="23" selection-start-line="229" selection-start-column="23" selection-end-line="229" selection-end-column="23" />
+        <state vertical-scroll-proportion="-0.62352943" vertical-offset="2410" max-vertical-offset="4080">
+          <caret line="146" column="30" selection-start-line="146" selection-start-column="30" selection-end-line="146" selection-end-column="30" />
           <folding>
-            <element signature="e#0#10656#0" expanded="true" />
+            <element signature="e#0#11560#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#5140#5711#0" expanded="true" />
-            <element signature="e#5688#5689#0" expanded="true" />
+            <element signature="e#5930#6592#0" expanded="true" />
+            <element signature="e#6569#6570#0" expanded="true" />
           </folding>
         </state>
       </provider>
